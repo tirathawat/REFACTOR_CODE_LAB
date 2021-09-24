@@ -1,3 +1,6 @@
+/* 62070501022 – Modified 2021-09-23 – Fixed pointer declaretion
+      in all file to make consistency code */
+
 /* 62070501022 – Modified 2021-09-23 – Make this module more fuctionality
       that fix freeloader module  */
 
@@ -37,7 +40,7 @@ int getMenuChoice()
 
 void createNewUserOption(char *username)
 {
-  USER_T * myProfile = NULL;
+  USER_T* myProfile = NULL;
   printf("\nEnter new username: ");
   myProfile = getUserProfile(username);
   if (myProfile == NULL)
@@ -55,7 +58,7 @@ void createNewUserOption(char *username)
 
 void printFriendsOption(char *username)
 {
-  USER_T * myProfile = NULL;
+  USER_T* myProfile = NULL;
   printf("\nPrint friends for what user? ");
   myProfile = getUserProfile(username);
   if (myProfile != NULL)
@@ -73,7 +76,7 @@ void printFriendsOption(char *username)
 
 void suggestFriendsOption(char *username)
 {
-  USER_T * myProfile = NULL;
+  USER_T* myProfile = NULL;
   int friendcount = 0;
   printf("\nSuggest friends for what user? ");
   myProfile = getUserProfile(username);
@@ -94,7 +97,7 @@ void suggestFriendsOption(char *username)
 
 void addFriendsOption(char *username)
 {
-  USER_T * myProfile = NULL;
+  USER_T* myProfile = NULL;
   printf("\nAdd friends for what user? ");
   myProfile = getUserProfile(username);
   if (myProfile != NULL)

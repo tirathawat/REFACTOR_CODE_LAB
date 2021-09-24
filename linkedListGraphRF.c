@@ -1,3 +1,7 @@
+/* 62070501022 – Modified 2021-09-23 – Fixed pointer declaretion
+      in all file to make consistency code */
+
+
 /*
  *  linkedListGraphRF.c
  *
@@ -85,7 +89,7 @@ void clearGraph()
  *       pPred  -  used to return the predecessor if any
  * Returns pointer to the vertex structure if one is found       
  */
-VERTEX_T *findVertexByKey(char* key, VERTEX_T** pPred) 
+VERTEX_T* findVertexByKey(char* key, VERTEX_T** pPred) 
 {
     VERTEX_T* pFoundVtx = NULL;
     VERTEX_T* pCurVertex = vListHead;
@@ -152,8 +156,8 @@ void colorAll(int color)
  */
 void traverseBreadthFirst(VERTEX_T* pVertex, void (*vFunction)(VERTEX_T*))
 {
-    VERTEX_T * pCurrent = NULL;
-    VERTEX_T * pAdjacent = NULL;
+    VERTEX_T* pCurrent = NULL;
+    VERTEX_T* pAdjacent = NULL;
     queueClear();
     colorAll(WHITE);
     pVertex->color = GRAY;
@@ -191,7 +195,7 @@ void traverseBreadthFirst(VERTEX_T* pVertex, void (*vFunction)(VERTEX_T*))
  */
 void traverseDepthFirst(VERTEX_T* pVertex, void (*vFunction)(VERTEX_T*))
 {
-    VERTEX_T * pAdjacent = NULL;    
+    VERTEX_T* pAdjacent = NULL;    
     ADJACENT_T* pRef = pVertex->adjacentHead;
     while (pRef != NULL)
        {
@@ -273,8 +277,8 @@ int addVertex(char* key, void* pData)
       }
    else
       {
-      VERTEX_T * pNewVtx = (VERTEX_T *) calloc(1,sizeof(VERTEX_T));
-      char * pKeyval = strdup(key);
+      VERTEX_T* pNewVtx = (VERTEX_T*) calloc(1,sizeof(VERTEX_T));
+      char* pKeyval = strdup(key);
       if ((pNewVtx == NULL) || (pKeyval == NULL))
          {
 	      bOk = 0;  /* allocation error */
@@ -377,7 +381,7 @@ void* removeVertex(char* key)
 int edgeExists(VERTEX_T* pFromVtx, VERTEX_T* pToVtx)
 {
    int bEdgeExists = 0;
-   ADJACENT_T * pAdjacent = pFromVtx->adjacentHead;
+   ADJACENT_T* pAdjacent = pFromVtx->adjacentHead;
    while ((pAdjacent != NULL) && (!bEdgeExists))
       {
       if (pAdjacent->pVertex == pToVtx)
@@ -431,7 +435,7 @@ int addEdge(char* key1, char* key2)
     /* If undirected, add an edge in the other direction */
     if ((bOk) && (!bGraphDirected))
       {
-      ADJACENT_T * pNewRef2 = (ADJACENT_T*) calloc(1,sizeof(ADJACENT_T));
+      ADJACENT_T* pNewRef2 = (ADJACENT_T*) calloc(1,sizeof(ADJACENT_T));
       if (pNewRef2 == NULL)
 	      bOk = 0;
       else
@@ -450,7 +454,7 @@ int addEdge(char* key1, char* key2)
 /* 62070501022 – Modified 2021-09-23 – Create function swapEdgeToRemove
       to reduce duplicate code and make function removeEdge easy to understand  */
 
-void swapEdgeToRemove(VERTEX_T * pFromVtx, VERTEX_T * pToVtx)
+void swapEdgeToRemove(VERTEX_T* pFromVtx, VERTEX_T* pToVtx)
 {
    ADJACENT_T* pRef = pFromVtx->adjacentHead;
    ADJACENT_T* pPrevRef = NULL;
@@ -489,9 +493,9 @@ void swapEdgeToRemove(VERTEX_T * pFromVtx, VERTEX_T * pToVtx)
 int removeEdge(char* key1, char* key2)
 {
    int bOk = 1;
-   VERTEX_T * pDummy = NULL;
-   VERTEX_T * pFromVtx = findVertexByKey(key1,&pDummy);
-   VERTEX_T * pToVtx = findVertexByKey(key2,&pDummy);
+   VERTEX_T* pDummy = NULL;
+   VERTEX_T* pFromVtx = findVertexByKey(key1,&pDummy);
+   VERTEX_T* pToVtx = findVertexByKey(key2,&pDummy);
    if ((pFromVtx == NULL) || (pToVtx == NULL))
       bOk = 0;
     /* 62070501022 – Modified 2021-09-23 – Use function edgeExists instead of more code

@@ -1,3 +1,6 @@
+/* 62070501022 – Modified 2021-09-23 – Fixed pointer declaretion
+      in all file to make consistency code */
+
 /*
  *   linkedListQueue.c
  *
@@ -16,12 +19,12 @@
 typedef struct _listitem
 {
     void* data;               /* Pointer to the data for this node */
-    struct _listitem * next;  /* Link to the next item in the list */
+    struct _listitem* next;  /* Link to the next item in the list */
 } LISTITEM_T;
 
 static int count = 0;              /* number of items in the queue */
-static LISTITEM_T * head = NULL;   /* front item in the queue */
-static LISTITEM_T * tail = NULL;   /* end item in the queue */
+static LISTITEM_T* head = NULL;   /* front item in the queue */
+static LISTITEM_T* tail = NULL;   /* end item in the queue */
 
 
 /* 62070501022 – Modified 2021-09-23 – Fix indentation for function enqueue
@@ -36,7 +39,7 @@ static LISTITEM_T * tail = NULL;   /* end item in the queue */
 int enqueue(void* data)
 {
    int bOk = 1;
-   LISTITEM_T * newItem = (LISTITEM_T *)calloc(1,sizeof(LISTITEM_T));
+   LISTITEM_T* newItem = (LISTITEM_T*)calloc(1,sizeof(LISTITEM_T));
    if (newItem == NULL)
       {
       bOk = 0;
@@ -67,12 +70,12 @@ int enqueue(void* data)
  * Also removes that item from the queue.
  * Returns NULL if the queue is empty.
  */
-void * dequeue()
+void* dequeue()
 {
-   void * returnData = NULL;
+   void* returnData = NULL;
    if (count > 0)
       {
-      LISTITEM_T * firstItem = head;
+      LISTITEM_T* firstItem = head;
       returnData = firstItem->data;
       head = firstItem->next;
       if (head == NULL)  /* if that was the last item on the queue */
@@ -97,8 +100,8 @@ int queueSize()
 void queueClear()
 {
    int i = 0;
-   LISTITEM_T * item = head;
-   LISTITEM_T * freeItem = NULL;
+   LISTITEM_T* item = head;
+   LISTITEM_T* freeItem = NULL;
    while (item != NULL)
    {
    freeItem = item;
@@ -123,7 +126,7 @@ void printDebug()
    if (count > 0)
       {
       printf("Contents: \n");
-      LISTITEM_T * item = head;
+      LISTITEM_T* item = head;
       while (item != NULL)
          {
 	      printf("\t\t%s\n", (char*) item->data);

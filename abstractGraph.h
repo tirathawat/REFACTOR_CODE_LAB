@@ -1,3 +1,6 @@
+/* 62070501022 – Modified 2021-09-23 – Fixed pointer declaretion
+      in all file to make consistency code */
+
 /* 
  *  abstractGraph.h
  *
@@ -18,7 +21,7 @@
  */
 typedef struct _adjVertex
 {
-    void * pVertex;           /* pointer to the VERTEX_T this
+    void* pVertex;           /* pointer to the VERTEX_T this
                                * item refers to.
                                */
     struct _adjVertex* next;  /* next item in the ajacency list */
@@ -28,14 +31,14 @@ typedef struct _adjVertex
 /* Vertex structure - repeated from linkedListGraph */
 typedef struct _vertex
 {
-    char * key;               /* key for this vertex */
-    void * data;              /* additional data for this vertex */
+    char* key;               /* key for this vertex */
+    void* data;              /* additional data for this vertex */
     int color;                /* used to mark nodes as visited */
-    struct _vertex * next;    /* next vertex in the list */
-    ADJACENT_T * adjacentHead;    /* pointer to the head of the
+    struct _vertex* next;    /* next vertex in the list */
+    ADJACENT_T* adjacentHead;    /* pointer to the head of the
 		                   * adjacent vertices list
                                    */
-    ADJACENT_T * adjacentTail;    /* pointer to the tail of the
+    ADJACENT_T* adjacentTail;    /* pointer to the tail of the
 			           * adjacent vertices list
                                    */
 }  VERTEX_T;

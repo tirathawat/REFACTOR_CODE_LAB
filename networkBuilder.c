@@ -1,3 +1,6 @@
+/* 62070501022 – Modified 2021-09-23 – Fixed pointer declaretion
+      in all file to make consistency code */
+
 /* 62070501022 – Modified 2021-09-23 – Create c file network Builder
     that build network from file to fix God module in social network module */
 
@@ -33,7 +36,7 @@ void createVertexByUser(USER_T* pUser)
 
 int createUser(char* inputline)
 {
-  USER_T * pUser = NULL;
+  USER_T* pUser = NULL;
   char username[32];
   /* 62070501022 – Modified 2021-09-23 – Rename username2 to friend
       so that make code easy to understand*/
@@ -90,7 +93,7 @@ void createFriendEdge(char* inputline)
     to read file and call function to build edge and vertex
     so that make code easy to understand*/
 
-int readFileToBuildNetwork(FILE *file)
+int readFileToBuildNetwork(FILE* file)
 {
   char inputline[128];
   int status = 1; /* used to test for errors */
@@ -118,7 +121,7 @@ int readFileToBuildNetwork(FILE *file)
  * the information in the file.
  * Returns 1 if successful, 0 if any error occurred
  */
-int buildNetwork(char *filename)
+int buildNetwork(char* filename)
 {
   FILE* file = NULL;
   char inputline[128];

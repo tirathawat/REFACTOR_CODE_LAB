@@ -1,3 +1,6 @@
+/* 62070501022 – Modified 2021-09-23 – Fixed pointer declaretion
+      in all file to make consistency code */
+
 /**
  *  abstractQueue.h
  *
@@ -28,7 +31,7 @@ int enqueue(void* data);
  * Also removes that item from the queue.
  * Returns NULL if the queue is empty.
  */
-void * dequeue();
+void* dequeue();
 
 /* Find out how many items are currently in the queue.
  * Return number of items in the queue (could be zero)

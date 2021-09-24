@@ -1,3 +1,6 @@
+/* 62070501022 – Modified 2021-09-23 – Fixed pointer declaretion
+      in all file to make consistency code */
+
 /* 62070501022 – Modified 2021-09-23 – Create header file abstractSocialNetwork
       to defines the necessary functions for a social network */
 
@@ -20,18 +23,18 @@ typedef struct
   char birthday[16];
 } USER_T;
 
-USER_T * getUserProfile(char *username);
+USER_T* getUserProfile(char* username);
 
-void suggestFriends(USER_T * targetUser);
+void suggestFriends(USER_T* targetUser);
 
-int printFriends(USER_T * targetUser,  USER_T * pExcludeUser,
+int printFriends(USER_T* targetUser,  USER_T* pExcludeUser,
 		 char** userFriends, int count);
 
-void addFriend(char *username, char *friendname);
+void addFriend(char* username, char* friendname);
 
-void addFriends(USER_T * focusUser);
+void addFriends(USER_T* focusUser);
 
-USER_T * addUser(char* username);
+USER_T* addUser(char* username);
 
 #endif
 

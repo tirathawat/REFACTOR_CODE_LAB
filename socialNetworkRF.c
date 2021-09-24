@@ -1,3 +1,6 @@
+/* 62070501022 – Modified 2021-09-23 – Fixed pointer declaretion
+      in all file to make consistency code */
+
 /**
  * Simple social network
  * This code reads a file that defines vertices and edges
@@ -23,7 +26,7 @@ VERTEX_T* findVertexByKey(char* key, VERTEX_T** pPred);
 /* 62070501022 – Modified 2021-09-23 – Create function add friend
       to reduce duplicate code and useful to use in other module  */
 
-void addFriend(char *username, char *friendname)
+void addFriend(char* username, char* friendname)
 {
   int status = 1;
   status = addEdge(username,friendname);
@@ -41,9 +44,9 @@ void addFriend(char *username, char *friendname)
  * Returns pointer to the USER_T constructed by this function
  * or NULL if an error.
  */
-USER_T * addUser(char* username)
+USER_T* addUser(char* username)
 {
-  USER_T * newUser = NULL;
+  USER_T* newUser = NULL;
   char input[32];
   newUser = calloc(1,sizeof(USER_T));
   if (newUser != NULL)
@@ -74,7 +77,7 @@ USER_T * addUser(char* username)
  *  focusUser      User for whom we are creating friends
  *                 Assumes this user exists
  */
-void addFriends(USER_T * focusUser)
+void addFriends(USER_T* focusUser)
 {
   char friendname[32];
   printf("\nAdding friends for user '%s %s (%s)'\n",
@@ -133,7 +136,7 @@ int searchExisting(char* targetUsername, char** friendnames, int count)
  *                          user is already connected.
  *   count                  0 if userFriends is NULL, else size of userFriends
  */
-int printFriends(USER_T * targetUser,  USER_T * pExcludeUser,
+int printFriends(USER_T* targetUser,  USER_T* pExcludeUser,
 		 char** userFriends, int count)
 {
   int i = 0;
@@ -180,7 +183,7 @@ int printFriends(USER_T * targetUser,  USER_T * pExcludeUser,
 /* Suggest as new friends people who are friends of your friends.
  *   pUser -- focus user for whom we are suggesting friends.
  */
-void suggestFriends(USER_T * targetUser)
+void suggestFriends(USER_T* targetUser)
 {
  int i = 0;
  int dummyCount = 0;
@@ -208,9 +211,9 @@ void suggestFriends(USER_T * targetUser)
 /* 62070501022 – Modified 2021-09-23 – Create function getUserProfile
       to reduce duplicate code and useful to use */
 
-USER_T * getUserProfile(char *username)
+USER_T* getUserProfile(char* username)
 {
-  USER_T * myProfile = NULL;
+  USER_T* myProfile = NULL;
   char inputline[32];
   fgets(inputline,sizeof(inputline),stdin);
   sscanf(inputline,"%s",username);
@@ -227,7 +230,7 @@ USER_T * getUserProfile(char *username)
 int main(int argc, char* argv[])
 {
   int status = 1;
-  USER_T * myProfile = NULL;
+  USER_T* myProfile = NULL;
   if (argc < 2)
     {
     printf("Please provide an input file name: ./socialNetwork [file]\n");
