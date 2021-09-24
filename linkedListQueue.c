@@ -24,6 +24,9 @@ static LISTITEM_T * head = NULL;   /* front item in the queue */
 static LISTITEM_T * tail = NULL;   /* end item in the queue */
 
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function enqueue
+      to follow code standard  */
+
 /**
  * Add a data item to the queue (end of the list)
  * Arguments:
@@ -55,6 +58,8 @@ int enqueue(void* data)
    return bOk;
 }
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function dequeue
+      to follow code standard  */
 
 /* Get the next item in the queue. This is the element
  * at the front of the queue.
@@ -87,8 +92,7 @@ int queueSize()
    return count;
 }
 
-
-/* Clear so we can reuse 
+/* Clear so we can reuse
  */
 void queueClear()
 {
@@ -107,6 +111,8 @@ void queueClear()
    count = 0;
 }
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function printDebug
+      to follow code standard  */
 
 /** DEBUGGING FUNCTION PRINTS SOME INFO ABOUT THE QUEUE **/
 void printDebug()

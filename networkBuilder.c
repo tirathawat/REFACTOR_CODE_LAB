@@ -1,3 +1,6 @@
+/* 62070501022 – Modified 2021-09-23 – Create c file network Builder
+    that build network from file to fix God module in social network module */
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -7,6 +10,9 @@
 
 /* declaration of function not in abstractGraph.h, to avoid warnings */
 VERTEX_T* findVertexByKey(char* key, VERTEX_T** pPred);
+
+/* 62070501022 – Modified 2021-09-23 – Create function createVertexByUser
+    to build vertex by user */
 
 void createVertexByUser(USER_T* pUser)
 {
@@ -22,10 +28,15 @@ void createVertexByUser(USER_T* pUser)
     printf("Successfully added user '%s' to the social network\n",username);
 }
 
+/* 62070501022 – Modified 2021-09-23 – Create function createUser
+    to read user and call function createVertexByUser */
+
 int createUser(char* inputline)
 {
   USER_T * pUser = NULL;
   char username[32];
+  /* 62070501022 – Modified 2021-09-23 – Rename username2 to friend
+      so that make code easy to understand*/
   char friend[32];
   char firstname[32];
   char lastname[32];
@@ -48,6 +59,8 @@ int createUser(char* inputline)
           strcpy(pUser->firstname,firstname);
           strcpy(pUser->lastname,lastname);
           strcpy(pUser->birthday,birthday);
+          /* 62070501022 – Modified 2021-09-23 – Use function createVertexByUser
+            to make code easy to understand */
           createVertexByUser(pUser);
           }
         else
@@ -60,6 +73,9 @@ int createUser(char* inputline)
   return 1;
 }
 
+/* 62070501022 – Modified 2021-09-23 – Create function createFriendEdge
+    to build edge */
+
 void createFriendEdge(char* inputline)
 {
   char username[32];
@@ -70,6 +86,9 @@ void createFriendEdge(char* inputline)
     addFriend(username, friend);
 }
 
+/* 62070501022 – Modified 2021-09-23 – Create function readFileToBuildNetwork
+    to read file and call function to build edge and vertex
+    so that make code easy to understand*/
 
 int readFileToBuildNetwork(FILE *file)
 {
@@ -90,6 +109,10 @@ int readFileToBuildNetwork(FILE *file)
     }
   return 1;
 }
+
+/* 62070501022 – Modified 2021-09-23 – Moved function buildNetwork to this module
+    so that fix God module and use readFileToBuildNetwork function
+    to make code easy to understand */
 
 /* Initializes and builds the network based on
  * the information in the file.

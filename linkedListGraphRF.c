@@ -34,6 +34,9 @@ VERTEX_T* vListTail = NULL;  /* tail of the vertex list */
 int bGraphDirected = 0;       /* if true, this is a directed graph */
 
 
+/* 62070501022 – Modified 2021-09-23 – Moved freeAdjacencyList function to top of file
+      so that other functions can be used  */
+
 /* Free the adjacencyList for a vertex 
  * Argument
  *   pVertex    - vertex whose edges we want to delete 
@@ -71,6 +74,9 @@ void clearGraph()
     bGraphDirected = 0;
 
 }
+
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function findVertexByKey
+      to follow code standard  */
 
 /* Finds the vertex that holds the passed key
  * (if any) and returns a pointer to that vertex.
@@ -135,6 +141,9 @@ void colorAll(int color)
        }
 }
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function traverseBreadthFirst
+      to follow code standard  */
+
 /* Execute a breadth first search from a vertex,
  * calling the function (*vFunction) on each vertex
  * as we visit it and color it black.
@@ -171,6 +180,8 @@ void traverseBreadthFirst(VERTEX_T* pVertex, void (*vFunction)(VERTEX_T*))
        } /* end while queue has data */
 }
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function traverseDepthFirst
+      to follow code standard  */
 
 /* Execute a depth first search from a single vertex,
  * calling the function (*vFunction) on the lowest level
@@ -235,6 +246,9 @@ int initGraph(int maxVertices, int bDirected)
 }
 
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function addVertex
+      to follow code standard  */
+
 /* Add a vertex into the graph.
  * Arguments
  *     key   -   Key value or label for the 
@@ -283,6 +297,8 @@ int addVertex(char* key, void* pData)
    return bOk;
 }
 
+ /* 62070501022 – Modified 2021-09-23 – Create function skipTargetVertex
+               to reduce code of function which makes it easy to understand  */
 
 void skipTargetVertex(VERTEX_T* pCurrentVtx, VERTEX_T* pRemoveVtx)
 {
@@ -312,6 +328,9 @@ void skipTargetVertex(VERTEX_T* pCurrentVtx, VERTEX_T* pRemoveVtx)
       }
 }
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function removeVertex
+      to follow code standard  */
+
 /* Remove a vertex from the graph.
  * Arguments
  *     key   -   Key value or label for the 
@@ -331,6 +350,8 @@ void* removeVertex(char* key)
       VERTEX_T* pCurrentVtx = vListHead;
       while (pCurrentVtx != NULL)
          {
+         /* 62070501022 – Modified 2021-09-23 – Create function skipTargetVertex
+               to reduce code of function which makes it easy to understand  */
          if (pCurrentVtx != pRemoveVtx)
             skipTargetVertex(pCurrentVtx,pRemoveVtx);
          /* END of code to remove references to vertex in edges */
@@ -350,6 +371,9 @@ void* removeVertex(char* key)
    return pData;
 }
 
+/* 62070501022 – Modified 2021-09-23 – Create function edgeExists to check edge exists
+      which reduce code of function which makes it easy to understand and useful to use in other functions */
+
 int edgeExists(VERTEX_T* pFromVtx, VERTEX_T* pToVtx)
 {
    int bEdgeExists = 0;
@@ -363,6 +387,9 @@ int edgeExists(VERTEX_T* pFromVtx, VERTEX_T* pToVtx)
       }
    return bEdgeExists;
 }
+
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function addEdge
+      to follow code standard  */
 
 /* Add an edge between two vertices
  * Arguments
@@ -382,7 +409,9 @@ int addEdge(char* key1, char* key2)
     if ((pFromVtx == NULL) || (pToVtx == NULL))
       bOk = 0;
     else /* CHECK if there is already an edge between these vertices */
-      if (edgeExists(pFromVtx, pToVtx))
+      /* 62070501022 – Modified 2021-09-23 – Use function edgeExists instead of more code
+            to make this function easy to understand  */
+      if (edgeExists(pFromVtx, pToVtx)) 
          bOk = -1;
     if (bOk == 1) /* no errors so far */
        {
@@ -418,6 +447,36 @@ int addEdge(char* key1, char* key2)
     return bOk;
 }
 
+/* 62070501022 – Modified 2021-09-23 – Create function swapEdgeToRemove
+      to reduce duplicate code and make function removeEdge easy to understand  */
+
+void swapEdgeToRemove(VERTEX_T * pFromVtx, VERTEX_T * pToVtx)
+{
+   ADJACENT_T* pRef = pFromVtx->adjacentHead;
+   ADJACENT_T* pPrevRef = NULL;
+   while (pRef != NULL)
+      {
+      if (pRef->pVertex == pToVtx)  /* if this edge involves the target*/
+	      {
+	      if (pPrevRef != NULL)
+	         pPrevRef->next = pRef->next;
+	      else
+	         pFromVtx->adjacentHead = pRef->next;
+	      if (pRef == pFromVtx->adjacentTail)
+	         pFromVtx->adjacentTail = NULL;
+         free(pRef);
+         break;    /* can only show up once in the adjacency list*/
+         }
+      else
+	      {
+         pPrevRef = pRef;
+         pRef = pRef->next;
+         }
+      }
+}
+
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function removeEdge
+      to follow code standard  */
 
 /* Remove an edge between two vertices
  * Arguments
@@ -434,88 +493,18 @@ int removeEdge(char* key1, char* key2)
    VERTEX_T * pFromVtx = findVertexByKey(key1,&pDummy);
    VERTEX_T * pToVtx = findVertexByKey(key2,&pDummy);
    if ((pFromVtx == NULL) || (pToVtx == NULL))
-     {
-     bOk = 0;
-     }
-   else 
-     {
-     int bEdgeExists = 0;
-     ADJACENT_T * pAdjacent = pFromVtx->adjacentHead;
-     while ((pAdjacent != NULL) && (!bEdgeExists))
-       {
-       if (pAdjacent->pVertex == pToVtx)
-	 {
-	 bEdgeExists = 1;  /* the 'To' vertex is connected to the 'From' vertex */ 
-	 }
-       else
-         {
-            pAdjacent = pAdjacent->next;
-         }
-       } 
-     if (!bEdgeExists) /* No edge to remove */
-	 bOk = -1;	   
-     }
+      bOk = 0;
+    /* 62070501022 – Modified 2021-09-23 – Use function edgeExists instead of more code
+            to make this function easy to understand  */
+   else if (!edgeExists(pFromVtx, pToVtx)) /* No edge to remove */
+	   bOk = -1;
+    /* 62070501022 – Modified 2021-09-23 – Use function swapEdgeToRemove instead of more code
+            to make this function easy to understand and reduce duplicate code  */
    if (bOk == 1)
-     {
-     ADJACENT_T* pRef = pFromVtx->adjacentHead;
-     ADJACENT_T* pPrevRef = NULL;
-     while (pRef != NULL)
-       {  
-       if (pRef->pVertex == pToVtx)  /* if this edge involves the target*/
-	 {
-	 if (pPrevRef != NULL)
-	   {
-	   pPrevRef->next = pRef->next;
-	   }
-	 else
-	   {
-	   pFromVtx->adjacentHead = pRef->next;   
-	   }
-	 if (pRef == pFromVtx->adjacentTail)
-	   {
-	   pFromVtx->adjacentTail = NULL;
-	   }
-	 free(pRef);
-	 break;    /* can only show up once in the adjacency list*/
-	 }
-       else
-	 {
-	 pPrevRef = pRef;
-	 pRef = pRef->next;
-	 }  
-       }
-       /* If undirected, remove edge in the other direction */
-       if ((bOk) && (!bGraphDirected))
-         {
-         ADJACENT_T* pRef2 = pToVtx->adjacentHead;
-	 ADJACENT_T* pPrevRef2 = NULL;
-	 while (pRef2 != NULL)
-	   {   
-	   if (pRef2->pVertex == pFromVtx)  
-	     {
-	     if (pPrevRef2 != NULL)
-	       {
-	       pPrevRef2->next = pRef2->next;
-	       }
-	     else
-	       {
-	       pToVtx->adjacentHead = pRef2->next;   
-	       }
-	     if (pRef2 == pToVtx->adjacentTail)
-	       {
-	       pToVtx->adjacentTail = NULL;
-	       }
-	     free(pRef2);
-	     break;    /* can only show up once in the adjacency list*/
-	     }
-	   else
-	     {
-	     pPrevRef2 = pRef2;
-	     pRef2 = pRef2->next;
-	     }  
-	   }
-	 }
-     }
+      swapEdgeToRemove(pFromVtx, pToVtx);
+   /* If undirected, remove edge in the other direction */
+   if ((bOk) && (!bGraphDirected))
+      swapEdgeToRemove(pToVtx, pFromVtx);
    return bOk;
 }
 
@@ -537,6 +526,8 @@ void* findVertex(char* key)
     return pData;
 }
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function getAdjacentVertices
+      to follow code standard  */
 
 /* Return an array of copies of the keys for all nodes
  * adjacent to a node. The array and its
@@ -597,6 +588,9 @@ int printBreadthFirst(char* startKey)
       traverseBreadthFirst(pVertex, &printVertexInfo);
    return retval;
 }
+
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function printDepthFirst
+      to follow code standard  */
 
 /* Print out all the nodes by a depth-first search.
  */

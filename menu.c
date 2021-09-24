@@ -1,3 +1,6 @@
+/* 62070501022 – Modified 2021-09-23 – Make this module more fuctionality
+      that fix freeloader module  */
+
 /* Module to control menu for socialNetwork program
  *   Created by Sally Goldin 16 September 2021
  */
@@ -22,14 +25,18 @@ int getMenuChoice()
   printf("\t5 - Exit the program\n");
   while ((choice < 1) || (choice > 5))
     {
-    printf("What action? ");  
+    printf("What action? ");
     fgets(input,sizeof(input),stdin);
     sscanf(input,"%d",&choice);
     }
   return choice;
 }
 
-void createNewUserOption(char *username) {
+/* 62070501022 – Modified 2021-09-23 – Create option function createNewUserOption
+    to run addUser function in social network module */
+
+void createNewUserOption(char *username)
+{
   USER_T * myProfile = NULL;
   printf("\nEnter new username: ");
   myProfile = getUserProfile(username);
@@ -43,7 +50,11 @@ void createNewUserOption(char *username) {
     }
 }
 
-void printFriendsOption(char *username) {
+/* 62070501022 – Modified 2021-09-23 – Create option function printFriendsOption
+    to run printFriends function in social network module */
+
+void printFriendsOption(char *username)
+{
   USER_T * myProfile = NULL;
   printf("\nPrint friends for what user? ");
   myProfile = getUserProfile(username);
@@ -57,7 +68,11 @@ void printFriendsOption(char *username) {
     }
 }
 
-void suggestFriendsOption(char *username) {
+/* 62070501022 – Modified 2021-09-23 – Create option function suggestFriendsOption
+    to run suggestFriends function in social network module */
+
+void suggestFriendsOption(char *username)
+{
   USER_T * myProfile = NULL;
   int friendcount = 0;
   printf("\nSuggest friends for what user? ");
@@ -74,7 +89,11 @@ void suggestFriendsOption(char *username) {
     }
 }
 
-void addFriendOption(char *username) {
+/* 62070501022 – Modified 2021-09-23 – Create option function addFriendsOption
+    to run addFriends function in social network module */
+
+void addFriendsOption(char *username)
+{
   USER_T * myProfile = NULL;
   printf("\nAdd friends for what user? ");
   myProfile = getUserProfile(username);
@@ -89,12 +108,18 @@ void addFriendOption(char *username) {
 }
 
 
-void runMenu() {
+/* 62070501022 – Modified 2021-09-23 – Create function runMenu
+    to run different operations */
+
+void runMenu() 
+{
   int option = 0;
   char username[32] = "";
   while (option != 5)
     {
     option = getMenuChoice();
+    /* 62070501022 – Modified 2021-09-23 – Use option function to make
+      code easy to understand */
     switch(option)
       {
       case 1:
@@ -107,7 +132,7 @@ void runMenu() {
           suggestFriendsOption(username);
           break;
       case 4:
-          addFriendOption(username);
+          addFriendsOption(username);
           break;
       case 5:
 	        break;

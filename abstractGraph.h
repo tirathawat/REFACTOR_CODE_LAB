@@ -1,4 +1,4 @@
-/*  
+/* 
  *  abstractGraph.h
  *
  *  Defines the necessary functions for a graph
@@ -8,6 +8,10 @@
  */
 #ifndef ABSTRACTGRAPH_H
 #define ABSTRACTGRAPH_H
+
+
+/* 62070501022 – Modified 2021-09-23 – Moved struct to the header file
+      to reduce duplicate code in two modules */
 
 /* List items for the adjacency list.
  * Each one represents an edge leading to an existing vertex

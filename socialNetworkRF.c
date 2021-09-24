@@ -20,6 +20,9 @@
 VERTEX_T* findVertexByKey(char* key, VERTEX_T** pPred);
 
 
+/* 62070501022 – Modified 2021-09-23 – Create function add friend
+      to reduce duplicate code and useful to use in other module  */
+
 void addFriend(char *username, char *friendname)
 {
   int status = 1;
@@ -87,6 +90,8 @@ void addFriends(USER_T * focusUser)
     if (strcmp(friendname,focusUser->username) == 0)
       printf("\t>>You can't add yourself as a friend!\n");
     else
+      /* 62070501022 – Modified 2021-09-23 – User addFriend function to
+        to make code easy to understand  */
       addFriend(focusUser->username, friendname);
     }
 }
@@ -109,6 +114,8 @@ int searchExisting(char* targetUsername, char** friendnames, int count)
   return found;
 }
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function printFriends
+      to follow code standard  */
 
 /* This function will print the names of all the friends
  * of the passed user. It will return the number of friends
@@ -167,6 +174,9 @@ int printFriends(USER_T * targetUser,  USER_T * pExcludeUser,
   return adjustedFriendCount;
 }
 
+/* 62070501022 – Modified 2021-09-23 – Fix indentation for function suggestFriends
+      to follow code standard  */
+
 /* Suggest as new friends people who are friends of your friends.
  *   pUser -- focus user for whom we are suggesting friends.
  */
@@ -195,6 +205,8 @@ void suggestFriends(USER_T * targetUser)
     }
 }
 
+/* 62070501022 – Modified 2021-09-23 – Create function getUserProfile
+      to reduce duplicate code and useful to use */
 
 USER_T * getUserProfile(char *username)
 {
@@ -205,6 +217,9 @@ USER_T * getUserProfile(char *username)
   myProfile = findVertex(username);
   return myProfile;
 }
+
+/* 62070501022 – Modified 2021-09-23 – Use function buildNetwork and runMenu 
+      in other module to make code easy to understand*/
 
 /* main function builds the graph, then enters a loop 
  * doing different operations 
